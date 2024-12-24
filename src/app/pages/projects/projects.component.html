@@ -1,1 +1,38 @@
-<p>projects works!</p>
+<div class="container">
+  <h1>Your Projects</h1>
+
+
+  <!-- Barre de recherche -->
+  <div class="search-bar">
+    <mat-form-field appearance="fill">
+      <mat-label>Search your projects...</mat-label>
+      <input matInput [(ngModel)]="searchTerm" placeholder="Search">
+    </mat-form-field>
+  </div>
+
+  <!-- Cartes de projet avec une boucle sur les projets -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6" *ngFor="let project of filteredProjects()">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">{{ project.title }}</h5>
+            <p class="card-text">{{ project.description }}</p>
+            <button mat-raised-button color="primary">Go somewhere</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Pagination -->
+  <div class="pagination" style="display: flex; justify-content: center; margin-top: 20px;">
+    <mat-paginator [length]="filteredProjectsCount"
+                   [pageSize]="pageSize"
+                   [pageIndex]="pageIndex"
+                   (page)="pageChanged($event)">
+    </mat-paginator>
+  </div>
+  
+</div>
