@@ -16,7 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
- // Si vous utilisez des boutons Material
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
+import { GeneratecodeComponent } from './pages/gen-code/generatecode.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
     LoginComponent,
     SignupComponent,
     ProjectsComponent,
-
+    GeneratecodeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +38,11 @@ import { MatButtonModule } from '@angular/material/button';
     // Ajoutez les modules Angular Material à l'importation
     MatPaginatorModule,  // Pagination
     MatInputModule,      // Barre de recherche
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,      // Boutons Material (si nécessaire)
+    MatButtonModule ,     // Boutons Material (si nécessaire)
+    MatGridListModule,
+    BrowserModule,
+    MatGridListModule,  // Ajouter le module MatGridListModule
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
