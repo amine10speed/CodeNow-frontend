@@ -212,4 +212,15 @@
       flex: 1 1 100%;
     }
   }
+
+  .no-projects-message {
+    font-size: 1.5rem; /* Bigger font size */
+    font-weight: bold;
+    color: white; /* White text */
+    text-align: center; /* Center text horizontally */
+    margin-top: 20px; /* Add some space from the top */ /* Optional: Add background for better visibility */
+    padding: 10px; /* Optional: Add padding for visual balance */
+    border-radius: 5px; /* Optional: Add rounded corners */
+  }
+  
   

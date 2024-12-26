@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,15 +11,19 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   onSubmit(): void {
-    // Example: Replace this with an actual API call
-    if (this.username === 'user' && this.password === 'password') {
-      alert('Login successful!');
-      this.router.navigate(['/dashboard']); // Navigate to the dashboard
-    } else {
-      alert('Invalid username or password');
-    }
+    this.authService.login(this.username, this.password).subscribe(
+      (token) => {
+        localStorage.setItem('token', token); // Save token
+        alert('Login successful!');
+        this.router.navigate(['/projects']); // Navigate to the projects page
+      },
+      (error) => {
+        alert('Invalid username or password');
+        console.error('Login error:', error);
+      }
+    );
   }
 }
