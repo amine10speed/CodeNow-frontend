@@ -42,7 +42,9 @@ import { GeneratecodeComponent } from './pages/gen-code/generatecode.component';
     MatGridListModule,
     BrowserModule,
     MatGridListModule,  // Ajouter le module MatGridListModule
-    MatListModule
+    MatListModule,
+    MatDialogModule,
+    MatIconModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
