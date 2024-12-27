@@ -29,6 +29,28 @@ export class GenCodeComponent implements OnInit {
   ngOnInit(): void {
     this.projectId = Number(this.route.snapshot.paramMap.get('id'));
     this.projectName = this.route.snapshot.paramMap.get('name');
+
+    if (this.projectId) {
+      this.loadGeneratedCodes();
+    }
+  }
+
+  loadGeneratedCodes(): void {
+    const token = localStorage.getItem('token');
+    if (token && this.projectId) {
+      this.genCodeService.getGeneratedCodesForProject(this.projectId, token).subscribe(
+        (response) => {
+          this.files = response.map((code, index) => ({
+            id: code.id,
+            name: code.codeName,
+            editing: false
+          }));
+        },
+        (error) => {
+          console.error('Error fetching generated codes:', error);
+        }
+      );
+    }
   }
 
   addNewFile(): void {
@@ -83,22 +105,29 @@ export class GenCodeComponent implements OnInit {
   }
 
   generateCode(): void {
-    if (this.projectId && this.language && this.designPattern) {
+    if (this.projectId && this.language && this.designPattern && this.currentFileId !== null) {
       const token = localStorage.getItem('token');
       const templateId = this.templates.find((template) => template.name === this.designPattern)?.id;
-  
+
       if (!templateId || !token) {
         alert('Failed to fetch required data!');
         return;
       }
-  
-      // Explicitly type the accumulator as an object with string keys and string values
+
       const fieldValues = this.metadataFields.reduce((acc: { [key: string]: string }, field) => {
         acc[field.key] = field.value;
         return acc;
       }, {});
-  
-      this.genCodeService.generateCode(templateId, this.projectId, fieldValues, token).subscribe(
+
+      const currentFile = this.files.find((file) => file.id === this.currentFileId);
+      const codeName = currentFile ? currentFile.name : 'Unnamed File';
+
+      const payload = {
+        ...fieldValues,
+        codeName
+      };
+
+      this.genCodeService.generateCode(templateId, this.projectId, payload, token).subscribe(
         (response) => {
           this.generatedCode = response.generatedCode;
         },
@@ -106,7 +135,8 @@ export class GenCodeComponent implements OnInit {
           console.error('Error generating code:', error);
         }
       );
+    } else {
+      alert('Please select a file and fill in all required fields!');
     }
   }
-  
 }
