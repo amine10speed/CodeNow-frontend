@@ -22,4 +22,9 @@ export class GenCodeService {
     return this.http.get<any[]>(`http://localhost:8888/CODEGEN-SERVICE/api/codegen/project/${projectId}`, { headers });
   }
   
+  getGeneratedCodeDetails(fileId: number, token: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`http://localhost:8888/CODEGEN-SERVICE/api/codegen/file/${fileId}`, { headers });
+  }
+  
 }

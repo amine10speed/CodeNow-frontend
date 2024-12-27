@@ -40,7 +40,7 @@ export class GenCodeComponent implements OnInit {
     if (token && this.projectId) {
       this.genCodeService.getGeneratedCodesForProject(this.projectId, token).subscribe(
         (response) => {
-          this.files = response.map((code, index) => ({
+          this.files = response.map((code) => ({
             id: code.id,
             name: code.codeName,
             editing: false
@@ -68,7 +68,33 @@ export class GenCodeComponent implements OnInit {
 
   selectFile(fileId: number): void {
     this.currentFileId = fileId;
-    this.metadataFields = []; // Reset metadata fields when switching files
+    const selectedFile = this.files.find((file) => file.id === fileId);
+
+    if (selectedFile) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        // Fetch the generated code details for the selected file
+        this.genCodeService.getGeneratedCodeDetails(fileId, token).subscribe(
+          (response) => {
+            this.language = response.language;
+            this.designPattern = response.templateName;
+            this.generatedCode = response.generatedCode;
+
+            // Parse metadata fields from the response (if available)
+            const metadata = response.metadata;
+            this.metadataFields = metadata
+  ? Object.entries(metadata).map(([key, value]) => ({
+      key,
+      value: String(value) // Ensure the value is treated as a string
+    }))
+  : [];
+          },
+          (error) => {
+            console.error('Error fetching file details:', error);
+          }
+        );
+      }
+    }
   }
 
   onLanguageSelect(lang: string): void {
