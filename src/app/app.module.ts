@@ -11,6 +11,8 @@ import { ProjectsComponent } from './pages/projects/projects.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Ajoutez les modules d'Angular Material ici
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -18,7 +20,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
-import { GeneratecodeComponent } from './pages/gen-code/generatecode.component';
+import { GenCodeComponent } from './pages/gen-code/gen-code.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +30,7 @@ import { GeneratecodeComponent } from './pages/gen-code/generatecode.component';
     LoginComponent,
     SignupComponent,
     ProjectsComponent,
-    GeneratecodeComponent
+    GenCodeComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,8 @@ import { GeneratecodeComponent } from './pages/gen-code/generatecode.component';
     MatListModule,
     MatDialogModule,
     MatIconModule, 
+    MatSelectModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

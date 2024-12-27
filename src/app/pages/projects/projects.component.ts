@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ProjectService } from '../../services/project.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -18,7 +19,8 @@ export class ProjectsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -103,6 +105,10 @@ export class ProjectsComponent implements OnInit {
         }
       );
     }
+  }
+
+  navigateToProject(projectId: number, projectName: string): void {
+    this.router.navigate([`/gen-code`, projectId, projectName]);
   }
   
 }

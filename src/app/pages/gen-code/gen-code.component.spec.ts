@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeneratecodeComponent } from './generatecode.component';
+import { GenCodeComponent } from './gen-code.component';
 
-describe('GeneratecodeComponent', () => {
-  let component: GeneratecodeComponent;
-  let fixture: ComponentFixture<GeneratecodeComponent>;
+describe('GenCodeComponent', () => {
+  let component: GenCodeComponent;
+  let fixture: ComponentFixture<GenCodeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GeneratecodeComponent]
+      declarations: [GenCodeComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GeneratecodeComponent);
+    fixture = TestBed.createComponent(GenCodeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
